@@ -1,0 +1,48 @@
+drop table if exists xgb_pred_1;
+DROP OFFLINEMODEL IF EXISTS xgboost_1;
+
+-- train
+PAI
+-name xgboost
+-project algo_public
+-Deta="0.01"
+-Dobjective="reg:linear"
+-DitemDelimiter=","
+-Dseed="0"
+-Dnum_round="3500"
+-DlabelColName="power_consumption"
+-DinputTableName="tianchi_power_sum_min_input_1"
+-DenableSparse="false"
+-Dmax_depth="8"
+-Dsubsample="0.4"
+-Dcolsample_bytree="0.6"
+-DmodelName="xgboost_1"
+-Dgamma="0"
+-Dlambda="50" 
+-DfeatureColNames="year,month,day,dow,holiday,season,mean_1,d_max_1,d_min_1,d_median_1,mean_2,d_max_2,d_min_2,d_median_2,mean_avg,mean_dist,d_max_avg,d_max_dist,d_min_avg,d_min_dist,d_median_avg,d_median_dist,tem_h,tem_l,tem_avg,tem_dist,row_n"
+-Dbase_score="0.11"
+-Dmin_child_weight="100"
+-DkvDelimiter=":";
+
+
+-- predict
+PAI
+-name prediction
+-project algo_public
+-DdetailColName="prediction_detail"
+-DappendColNames="year,day"
+-DmodelName="xgboost_1"
+-DitemDelimiter=","
+-DresultColName="prediction_result"
+-Dlifecycle="28"
+-DoutputTableName="xgb_pred_1"
+-DscoreColName="prediction_score"
+-DkvDelimiter=":"
+-DfeatureColNames="year,month,day,dow,holiday,season,mean_1,d_max_1,d_min_1,d_median_1,mean_2,d_max_2,d_min_2,d_median_2,mean_avg,mean_dist,d_max_avg,d_max_dist,d_min_avg,d_min_dist,d_median_avg,d_median_dist,tem_h,tem_l,tem_avg,tem_dist,row_n"
+-DinputTableName="tianchi_power_sum_min_output_2"
+-DenableSparse="false";
+
+select * from xgb_pred_1;
+
+drop table if exists xgb_pred_2;
+DROP OFFLINEMODEL IF EXISTS xgboost_2;
