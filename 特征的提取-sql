@@ -1,0 +1,231 @@
+//读取数据表
+create table if not exists tianchi_power3 as select * from odps_tc_257100_f673506e024.tianchi_power2;
+select * from tianchi_power3;
+
+//获取所有企业用户每天用电总和表
+drop table if exists tianchi_power_sum;
+create table tianchi_power_sum as
+select
+    record_date,
+    sum(power_consumption)  as power_consumption
+from tianchi_power3  Group by record_date ;
+select * from tianchi_power_sum;
+
+//获得年，月，日作为特征
+drop table if exists tianchi_power_sum_date;
+create table tianchi_power_sum_date as
+select
+   concat(split_part(record_date,'/',1),
+'-',
+if(length(split_part(record_date,'/',2)) ==1,concat('0',split_part(record_date,'/',2)),split_part(record_date,'/',2)),
+'-',
+if(length(split_part(record_date,'/',3)) ==1,concat('0',split_part(record_date,'/',3)),split_part(record_date,'/',3))) as record_date,
+    power_consumption,
+	cast(split_part(record_date,'/',1) as bigint ) as year,
+	cast (split_part(record_date,'/',2) as bigint) as month,
+	cast(split_part(record_date,'/',3)as bigint ) as day
+from tianchi_power_sum where record_date >= '2015/3/1';
+
+//提取每月的均值，最大值，最小值，中位数等特征
+rop table if exists tianchi_power_sum_mean;
+create table tianchi_power_sum_mean  as
+select
+     substr(record_date,1,7)as month_str,
+	 avg(power_consumption) over ( partition  by year,month ) as mean,
+	 max(power_consumption) over ( partition  by year,month ) as d_max,
+	 min(power_consumption) over ( partition  by year,month ) as d_min,
+	 median (power_consumption) over ( partition  by year,month ) as d_median
+from tianchi_power_sum_date where  record_date>= '2015-01-01';
+
+drop table if exists tianchi_power_sum_mean1;
+create table tianchi_power_sum_mean1  as
+
+select
+     distinct month_str,
+	 mean,
+	 d_max,
+	 d_min,
+	 d_median
+from tianchi_power_sum_mean;
+
+select * from tianchi_power_sum_mean1
+
+//添加企业用户特征
+drop table if exists tianchi_power_sum_mean3;
+create table tianchi_power_sum_mean3  as
+select
+    tianchi_power_sum_date.record_date as record_date,
+	power_consumption,
+	year,
+	month,
+	day,
+	cast (weekday(to_date(record_date,'yyyy-mm-dd')) as int) as  dow,
+	mean,
+	d_max,
+	d_min,
+	d_median
+from tianchi_power_sum_date left outer join tianchi_power_sum_mean1 on   substr(to_char(dateadd(to_date(tianchi_power_sum_date.record_date,'yyyy-mm-dd'),-1,'mm'),'yyyy-mm-dd'),1,7) = tianchi_power_sum_mean1.month_str;
+
+drop table if exists tianchi_power_sum_mean_3;
+create table tianchi_power_sum_mean_3  as
+select
+    tianchi_power_sum_mean3.record_date as record_date,
+	power_consumption,
+	year,
+	month,
+	day,
+	dow,
+	tianchi_power_sum_mean3.mean as mean_1,
+	tianchi_power_sum_mean3.d_max as d_max_1,
+	tianchi_power_sum_mean3.d_min as d_min_1,
+	tianchi_power_sum_mean3.d_median as d_median_1,
+	tianchi_power_sum_mean1.mean as mean_2,
+	tianchi_power_sum_mean1.d_max as d_max_2,
+	tianchi_power_sum_mean1.d_min as d_min_2,
+	tianchi_power_sum_mean1.d_median as d_median_2
+from tianchi_power_sum_mean3 left outer join tianchi_power_sum_mean1 on   substr(to_char(dateadd(to_date(tianchi_power_sum_mean3.record_date,'yyyy-mm-dd'),-2,'mm'),'yyyy-mm-dd'),1,7) = tianchi_power_sum_mean1.month_str;
+
+
+select * from tianchi_power_sum_mean_3
+
+//添加剩余特征
+drop table if exists tianchi_power_sum_input;
+create table tianchi_power_sum_input  as
+select
+    tianchi_power_sum_mean_3.record_date,
+	power_consumption,
+	year,
+	month,
+	day,
+	dow,
+	mean_1,
+	d_max_1,
+	d_min_1,
+	d_median_1,
+	mean_2,
+	d_max_2,
+	d_min_2,
+	d_median_2,
+	(mean_1+mean_2)/2 as mean_avg,
+	mean_1-mean_2 as mean_dist,
+	(d_max_1+d_max_2)/2 as d_max_avg,
+	d_max_1-d_max_2 as d_max_dist,
+	(d_min_1+d_min_2)/2 as d_min_avg,
+	d_min_1-d_min_2 as d_min_dist,
+	(d_median_1+d_median_2)/2 as d_median_avg,
+	d_median_1-d_median_2 as d_median_dist,
+	temperature_bigh-25 as tem_h,
+	temperature_low-25 as tem_l,
+	(temperature_bigh+temperature_low)/2-25 as tem_avg,
+	temperature_bigh-temperature_low as tem_dist,
+	row_number() over(partition by 1 order by year,tianchi_power_sum_mean_3.record_date) as row_n
+from tianchi_power_sum_mean_3 left outer join tianchi_weather_data1  on   tianchi_power_sum_mean_3.record_date = tianchi_weather_data1.record_date;
+
+
+drop table if exists tianchi_power_sum_input_1;
+create table tianchi_power_sum_input_1  as
+select
+    tianchi_power_sum_input.record_date,
+	power_consumption,
+	year,
+	month,
+	day,
+	dow,
+	mean_1,
+	d_max_1,
+	d_min_1,
+	d_median_1,
+	mean_2,
+	d_max_2,
+	d_min_2,
+	d_median_2,
+	mean_avg,
+	mean_dist,
+	d_max_avg,
+	d_max_dist,
+	d_min_avg,
+	d_min_dist,
+	d_median_avg,
+	d_median_dist,
+	tem_h,
+	tem_l,
+	tem_avg,
+	tem_dist,
+	row_n,
+	holiday,
+	season
+from tianchi_power_sum_input left outer join holiday1  on   tianchi_power_sum_input.record_date = holiday1.record_date;
+select * from tianchi_power_sum_input_1
+
+
+//预测月份的特征
+drop table if exists tianchi_power_sum_output;
+create table tianchi_power_sum_output  as
+select
+    holiday1.record_date as record_date,
+	cast (split_part(record_date,'-',1) as bigint ) as year,
+	cast (split_part(record_date,'-',2) as bigint ) as month,
+	cast (split_part(record_date,'-',3) as bigint ) as day,
+	weekday(to_date(record_date,'yyyy-mm-dd'))as  dow,
+	season,
+	holiday,
+	tianchi_power_sum_mean1.mean as mean_1,
+	tianchi_power_sum_mean1.d_max as d_max_1,
+	tianchi_power_sum_mean1.d_min as d_min_1,
+	tianchi_power_sum_mean1.d_median as d_median_1
+from holiday1 left outer join tianchi_power_sum_mean1 on  substr(to_char(dateadd(to_date(holiday1.record_date,'yyyy-mm-dd'),-1,'mm'),'yyyy-mm-dd'),1,7) = tianchi_power_sum_mean1.month_str where record_date>='2016-12-01' ;
+
+drop table if exists tianchi_power_sum_output_1;
+create table tianchi_power_sum_output_1  as
+select
+    tianchi_power_sum_output.record_date as record_date,
+	year,
+	month,
+	day,
+	dow,
+	holiday,
+	season,
+	mean_1,
+	d_max_1,
+	d_min_1,
+	d_median_1,
+	tianchi_power_sum_mean1.mean as mean_2,
+	tianchi_power_sum_mean1.d_max as d_max_2,
+	tianchi_power_sum_mean1.d_min as d_min_2,
+	tianchi_power_sum_mean1.d_median as d_median_2
+from tianchi_power_sum_output left outer join tianchi_power_sum_mean1 on   substr(to_char(dateadd(to_date(tianchi_power_sum_output.record_date,'yyyy-mm-dd'),-2,'mm'),'yyyy-mm-dd'),1,7) = tianchi_power_sum_mean1.month_str;
+
+drop table if exists tianchi_power_sum_output_2;
+create table tianchi_power_sum_output_2  as
+select
+    tianchi_power_sum_output_1.record_date,
+	year,
+	month,
+	day,
+	dow,
+	holiday,
+	season,
+	mean_1,
+	d_max_1,
+	d_min_1,
+	d_median_1,
+	mean_2,
+	d_max_2,
+	d_min_2,
+	d_median_2,
+	(mean_1+mean_2)/2 as mean_avg,
+	mean_1-mean_2 as mean_dist,
+	(d_max_1+d_max_2)/2 as d_max_avg,
+	d_max_1-d_max_2 as d_max_dist,
+	(d_min_1+d_min_2)/2 as d_min_avg,
+	d_min_1-d_min_2 as d_min_dist,
+	(d_median_1+d_median_2)/2 as d_median_avg,
+	d_median_1-d_median_2 as d_median_dist,
+	temperature_bigh-25 as tem_h,
+	temperature_low-25 as tem_l,
+	(temperature_bigh+temperature_low)/2-25 as tem_avg,
+	temperature_bigh-temperature_low as tem_dist,
+	day+549 as row_n
+from tianchi_power_sum_output_1 left outer join tianchi_weather_data1  on   tianchi_power_sum_output_1.record_date = tianchi_weather_data1.record_date;
+select * from tianchi_power_sum_output_2
+
