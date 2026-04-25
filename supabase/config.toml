@@ -1,0 +1,41 @@
+# Supabase 项目配置
+# 仅本地 CLI 开发使用；生产环境凭据保存在 Supabase Dashboard
+
+project_id = "guqin-yaji"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://localhost:3000"]
+jwt_expiry = 3600
+enable_signup = true
+enable_anonymous_sign_ins = false
+
+[auth.sms]
+enable_signup = true
+enable_confirmations = true
+template = "您的古琴云雅集验证码为 {{ .Code }}，5 分钟内有效。"
+
+[edge_runtime]
+enabled = true
+inspector_port = 8083
+policy = "oneshot"
+
+[experimental]
+orioledb_version = ""
