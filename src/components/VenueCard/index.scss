@@ -1,0 +1,44 @@
+.card-venue {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  padding: 24rpx;
+  border: 1rpx solid #e6dccc;
+  box-shadow: 0 2rpx 8rpx rgba(31, 26, 23, 0.04);
+
+  .logo {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    background: #1f1a17;
+    color: #b8860b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40rpx;
+    font-weight: 600;
+    margin-right: 24rpx;
+    flex-shrink: 0;
+  }
+  .body {
+    flex: 1;
+    overflow: hidden;
+  }
+  .name {
+    display: block;
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #2c2520;
+  }
+  .intro {
+    display: block;
+    margin-top: 6rpx;
+    font-size: 24rpx;
+    color: #6b5d54;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

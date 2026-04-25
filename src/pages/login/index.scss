@@ -1,0 +1,90 @@
+.page-login {
+  min-height: 100vh;
+  padding: 80rpx 60rpx;
+  background: #f5efe6;
+}
+.brand {
+  text-align: center;
+  margin-bottom: 80rpx;
+}
+.brand-title {
+  display: block;
+  font-size: 56rpx;
+  font-weight: 600;
+  color: #1f1a17;
+  letter-spacing: 8rpx;
+}
+.brand-sub {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #6b5d54;
+}
+.form {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  box-shadow: 0 4rpx 24rpx rgba(31, 26, 23, 0.06);
+}
+.input {
+  height: 88rpx;
+  border: 1rpx solid #e6dccc;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+  font-size: 28rpx;
+}
+.code-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+.code-input {
+  flex: 1;
+}
+.btn-code {
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 26rpx;
+  background: #b8860b;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  white-space: nowrap;
+}
+.btn-code[disabled] {
+  background: #ccc;
+  color: #fff;
+}
+.btn-primary {
+  margin-top: 16rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #1f1a17;
+  color: #f5efe6;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+}
+.btn-secondary {
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #07c160;
+  color: #fff;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32rpx 0;
+  color: #999;
+  font-size: 24rpx;
+}
+.tip {
+  display: block;
+  margin-top: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+}

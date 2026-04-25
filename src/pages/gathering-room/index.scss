@@ -1,0 +1,30 @@
+.page-room {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f5efe6;
+}
+.placeholder {
+  font-size: 32rpx;
+  margin-bottom: 16rpx;
+}
+.gid {
+  font-size: 22rpx;
+  color: #b8860b;
+}
+.controls {
+  padding: 32rpx;
+  text-align: center;
+}
+.hint {
+  font-size: 24rpx;
+  color: #999;
+}

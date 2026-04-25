@@ -1,0 +1,40 @@
+.card-gathering {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(31, 26, 23, 0.06);
+  border: 1rpx solid #e6dccc;
+
+  .cover {
+    height: 240rpx;
+    background: linear-gradient(135deg, #1f1a17, #b8860b);
+  }
+  .body {
+    padding: 24rpx;
+  }
+  .title {
+    display: block;
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #2c2520;
+  }
+  .time {
+    display: block;
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #b8860b;
+  }
+  .quota {
+    margin-top: 12rpx;
+    display: flex;
+    gap: 12rpx;
+  }
+  .quota-tag {
+    font-size: 22rpx;
+    color: #6b5d54;
+    background: #f5efe6;
+    padding: 4rpx 12rpx;
+    border-radius: 999rpx;
+  }
+}

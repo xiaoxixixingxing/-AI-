@@ -1,0 +1,20 @@
+// 全局样式 - 古琴雅集风格
+$primary: #b8860b;          // 古铜金
+$primary-dark: #8b6508;
+$ink: #1f1a17;              // 墨色
+$paper: #f5efe6;            // 宣纸色
+$text-primary: #2c2520;
+$text-secondary: #6b5d54;
+$border: #e6dccc;
+
+page {
+  background-color: $paper;
+  color: $text-primary;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.app-container {
+  min-height: 100vh;
+}

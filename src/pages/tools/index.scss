@@ -1,0 +1,43 @@
+.page-tools {
+  padding: 32rpx;
+}
+.page-header {
+  margin-bottom: 32rpx;
+}
+.page-title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 600;
+  color: #2c2520;
+}
+.page-sub {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #6b5d54;
+}
+.tool-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+}
+.tool-card {
+  width: calc(50% - 12rpx);
+  padding: 32rpx 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(31, 26, 23, 0.06);
+  border: 1rpx solid #e6dccc;
+  display: flex;
+  flex-direction: column;
+}
+.tool-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2c2520;
+}
+.tool-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #6b5d54;
+}

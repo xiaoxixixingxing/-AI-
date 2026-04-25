@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.temp/
+.rn_temp/
+.swc/
+deploy_versions/
+.cache/
+.idea/
+.vscode/
+*.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.tsbuildinfo
