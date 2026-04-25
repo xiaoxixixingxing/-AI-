@@ -1,0 +1,58 @@
+.page-search {
+  min-height: 100vh;
+  background: #f5efe6;
+}
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #e6dccc;
+}
+.search-input {
+  flex: 1;
+  height: 72rpx;
+  background: #f5efe6;
+  border-radius: 999rpx;
+  padding: 0 28rpx;
+  font-size: 28rpx;
+}
+.search-btn {
+  margin-left: 16rpx;
+  color: #b8860b;
+  font-size: 28rpx;
+}
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #e6dccc;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 26rpx;
+  color: #6b5d54;
+  border-bottom: 4rpx solid transparent;
+
+  &--active {
+    color: #b8860b;
+    border-bottom-color: #b8860b;
+  }
+}
+.results {
+  height: calc(100vh - 200rpx);
+  padding: 24rpx 32rpx;
+  box-sizing: border-box;
+}
+.hint {
+  padding: 80rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+}
+.player-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}

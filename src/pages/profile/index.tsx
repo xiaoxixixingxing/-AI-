@@ -33,7 +33,7 @@ export default function Profile() {
       </View>
 
       <View className='menu'>
-        <View className='menu-item' onClick={navTo('/pages/profile/index?tab=registrations')}>
+        <View className='menu-item' onClick={navTo('/pages/registrations/index')}>
           <Text>我的报名</Text>
           <Text className='arrow'>›</Text>
         </View>
@@ -41,8 +41,16 @@ export default function Profile() {
           <Text>我的雅集（主持/琴馆）</Text>
           <Text className='arrow'>›</Text>
         </View>
+        <View className='menu-item' onClick={navTo('/pages/venue-admin/index')}>
+          <Text>琴馆管理</Text>
+          <Text className='arrow'>›</Text>
+        </View>
         <View className='menu-item' onClick={() => Taro.switchTab({ url: '/pages/tools/index' })}>
-          <Text>小工具</Text>
+          <Text>雅器（小工具）</Text>
+          <Text className='arrow'>›</Text>
+        </View>
+        <View className='menu-item' onClick={navTo('/pages/search/index')}>
+          <Text>搜索</Text>
           <Text className='arrow'>›</Text>
         </View>
       </View>

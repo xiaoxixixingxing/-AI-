@@ -1,0 +1,73 @@
+.page-regs {
+  min-height: 100vh;
+  padding: 24rpx;
+  background: #f5efe6;
+}
+.hint {
+  display: block;
+  text-align: center;
+  padding: 80rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}
+.reg-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  border: 1rpx solid #e6dccc;
+}
+.reg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reg-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2c2520;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.reg-status {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 999rpx;
+
+  &--pending {
+    background: #fff8e1;
+    color: #f1c40f;
+  }
+  &--approved {
+    background: #e8f6e8;
+    color: #07c160;
+  }
+  &--rejected {
+    background: #fbeaea;
+    color: #c0392b;
+  }
+  &--cancelled {
+    background: #f0f0f0;
+    color: #999;
+  }
+}
+.reg-meta {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: #6b5d54;
+}
+.reg-reason {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #c0392b;
+}
+.btn-cancel {
+  margin-top: 16rpx;
+  background: #f5efe6;
+  color: #6b5d54;
+  border-radius: 999rpx;
+}

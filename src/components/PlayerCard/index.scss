@@ -1,0 +1,41 @@
+.card-player {
+  width: 220rpx;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #e6dccc;
+  margin-right: 16rpx;
+
+  .avatar {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1f1a17, #b8860b);
+    color: #f5efe6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40rpx;
+    font-weight: 600;
+    margin-bottom: 12rpx;
+  }
+  .name {
+    font-size: 28rpx;
+    color: #2c2520;
+    font-weight: 600;
+  }
+  .bio {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #6b5d54;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+}

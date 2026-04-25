@@ -5,6 +5,8 @@ export default defineAppConfig({
     'pages/tools/index',
     'pages/profile/index',
     'pages/login/index',
+    'pages/search/index',
+    'pages/registrations/index',
     'pages/gathering-detail/index',
     'pages/gathering-room/index',
     'pages/venue/index',

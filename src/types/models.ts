@@ -66,6 +66,8 @@ export interface Registration {
   bio?: string
   status: RegistrationStatus
   orderIndex?: number   // 演奏顺序（已通过的演奏者）
+  rejectReason?: string
+  reviewedAt?: string
   createdAt: string
 }
 

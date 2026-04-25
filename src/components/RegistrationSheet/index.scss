@@ -1,0 +1,87 @@
+.reg-sheet-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+.reg-sheet {
+  width: 100%;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 16rpx 32rpx 40rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  .handle {
+    width: 60rpx;
+    height: 6rpx;
+    background: #ddd;
+    border-radius: 3rpx;
+    margin: 0 auto 24rpx;
+  }
+  .title {
+    display: block;
+    font-size: 34rpx;
+    font-weight: 600;
+    color: #2c2520;
+    margin-bottom: 24rpx;
+  }
+  .label {
+    display: block;
+    font-size: 26rpx;
+    color: #6b5d54;
+    margin: 16rpx 0 8rpx;
+  }
+  .input {
+    height: 80rpx;
+    border: 1rpx solid #e6dccc;
+    border-radius: 12rpx;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+    background: #fafafa;
+  }
+  .textarea {
+    width: 100%;
+    height: 200rpx;
+    border: 1rpx solid #e6dccc;
+    border-radius: 12rpx;
+    padding: 16rpx 20rpx;
+    font-size: 28rpx;
+    background: #fafafa;
+    box-sizing: border-box;
+  }
+  .hint {
+    display: block;
+    color: #6b5d54;
+    font-size: 26rpx;
+    line-height: 1.6;
+    padding: 16rpx 0;
+  }
+  .actions {
+    display: flex;
+    gap: 16rpx;
+    margin-top: 32rpx;
+  }
+  .btn-cancel,
+  .btn-confirm {
+    flex: 1;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 999rpx;
+    font-size: 28rpx;
+  }
+  .btn-cancel {
+    background: #f5efe6;
+    color: #6b5d54;
+  }
+  .btn-confirm {
+    background: #b8860b;
+    color: #fff;
+  }
+  .btn-confirm[disabled] {
+    background: #ccc;
+    color: #fff;
+  }
+}
