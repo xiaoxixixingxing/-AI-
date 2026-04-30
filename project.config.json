@@ -2,7 +2,7 @@
   "miniprogramRoot": "./",
   "projectname": "guqin-yaji",
   "description": "古琴云雅集",
-  "appid": "touristappid",
+  "appid": "wx093891285de90e79",
   "setting": {
     "urlCheck": true,
     "es6": false,
